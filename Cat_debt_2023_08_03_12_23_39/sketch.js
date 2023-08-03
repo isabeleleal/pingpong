@@ -26,6 +26,10 @@ let velocidadeYRaqueteOponente = 6;
 
 let colidiu = false;
 
+//placar do jogo
+let meusPontos = 0;
+let pontosDoOponente = 0;
+
 function setup() {
   createCanvas(600, 400);
 }
@@ -43,6 +47,9 @@ function draw() {
   movimentoRaqueteOponente();
   colisaoMinhaRaqueteBiblioteca(xRaquete, yRaquete);
   colisaoMinhaRaqueteBiblioteca(xRaqueteOponente, yRaqueteOponente);
+  incluiPlacar();
+  marcaPonto();
+  
   
 }
 
@@ -92,7 +99,6 @@ function colisaoMinhaRaquete(x,y){
      velocidadeXBolinha *= -1;
    }
 
-  
 }
 
 
@@ -100,7 +106,21 @@ function movimentoRaqueteOponente(){
   velocidadeYRaqueteOponente = yBolinha - yRaqueteOponente - raqueteComprimento / 2 - 30;
   yRaqueteOponente += velocidadeYRaqueteOponente;
   
-  
     // Vamos limitar a movimentação da raquete para que ela não ultrapasse as bordas:
     yRaqueteOponente = constrain(yRaqueteOponente, 10, 310);
+}
+
+function incluiPlacar() {
+    fill(255);
+    text(meusPontos, 278, 26);
+    text(pontosDoOponente, 321, 26);
+}
+
+function marcaPonto() {
+    if (xBolinha > 590) {
+        meusPontos += 1;
+    }
+    if (xBolinha < 10) {
+        pontosDoOponente += 1;
+    }
 }
